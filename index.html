@@ -8,7 +8,7 @@
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 </head>
 <body>
-    <div data-role="page">
+    <div data-role="page" id="page1">
  
         <div data-role="header">
             <h1>My Title</h1>
@@ -17,9 +17,29 @@
         <div data-role="content">
             <p>Hello world</p>
         </div><!-- /content -->
+
+        <a data-role="button" href="#page2">
+            seite2
+        </a>
  
         <div data-role="footer">
             <h4>My Footer</h4>
+        </div><!-- /footer -->
+ 
+    </div><!-- /page -->
+    
+    <div data-role="page" id="page2">
+ 
+        <div data-role="header">
+            <h1>My Title2</h1>
+        </div><!-- /header -->
+ 
+        <div data-role="content">
+            <p>Hello world2</p>
+        </div><!-- /content -->
+ 
+        <div data-role="footer">
+            <h4>My Footer2</h4>
         </div><!-- /footer -->
  
     </div><!-- /page -->
