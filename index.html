@@ -6,38 +6,64 @@
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css">
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                //$("#div1").load("demo_test.txt");
+                $.ajax({
+                    url: "http://query.yahooapis.com/v1/public/yql",
+
+                    // the name of the callback parameter, as specified by the YQL service
+                    jsonp: "callback",
+
+                    // tell jQuery we're expecting JSONP
+                    dataType: "jsonp",
+
+                    // tell YQL what we want and that we want JSON
+                    data: {
+                        //                        q: "select title,abstract,url from search.news where query=\"cat\"",
+                        q: "SELECT title FROM search.ec WHERE keyword='ipad'",
+                        format: "json"
+                    },
+
+                    // work with the response
+                    success: function (response) {
+                        $("#label1").text(response.query.lang); // server response
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <div data-role="page" id="page1">
- 
+
         <div data-role="header">
             <h1>My Title</h1>
-        </div><!-- /header -->
- 
+        </div>
+        <!-- /header -->
+
         <div data-role="content">
             <p>Hello world</p>
-        </div><!-- /content -->
 
-        <a href="page2.html">
-            seite2
+            <label id="label1">noch nichts</label>
+            <div id="div1">
+                <h2>Let jQuery AJAX Change This Text</h2>
+            </div>
+            <button>Get External Content</button>
+        </div>
+        <!-- /content -->
+
+        <a href="page2.html">seite2
         </a>
 
-        <div data-role="fieldcontain">
-            <select name="toggleswitch1" id="toggleswitch1" data-theme="" data-role="slider">
-                <option value="off">
-                    Aus
-                </option>
-                <option value="on">
-                    An
-                </option>
-            </select>
-        </div>
- 
         <div data-role="footer">
             <h4>My Footer</h4>
-        </div><!-- /footer -->
- 
-    </div><!-- /page -->
-    
+        </div>
+        <!-- /footer -->
+
+    </div>
+    <!-- /page -->
+
 </body>
 </html>
