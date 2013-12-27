@@ -11,8 +11,30 @@
 
             $("button").click(function () {
                 //$("#div1").load("demo_test.txt");
-                $.ajax({
-                    url: "http://query.yahooapis.com/v1/public/yql",
+                //$.ajax("http://query.yahooapis.com/v1/public/yql", {
+                //    // url: ,
+
+                //    // the name of the callback parameter, as specified by the YQL service
+                //    jsonp: "callback",
+
+                //    // tell jQuery we're expecting JSONP
+                //    dataType: "jsonp",
+
+                //    // tell YQL what we want and that we want JSON
+                //    data: {
+                //        //q: "select title,abstract,url from search.news where query=\"cat\"",
+                //        q: "SELECT * FROM search.ec WHERE keyword='ipad'",
+                //        format: "json"
+                //    },
+
+                //    // work with the response
+                //    success: function (response) {
+                //        // $("#label1").text(response.query.lang); // server response
+                //        $("#label1").text(response.query.results.result.total); // server response
+                //    }
+                //});
+                $.ajax("http://buchholz.hs-bremen.de/klausurduell/default.aspx", {
+                    // url: ,
 
                     // the name of the callback parameter, as specified by the YQL service
                     jsonp: "callback",
@@ -21,26 +43,30 @@
                     dataType: "jsonp",
 
                     // tell YQL what we want and that we want JSON
-                    data: {
-                        //                        q: "select title,abstract,url from search.news where query=\"cat\"",
-                        q: "SELECT title FROM search.ec WHERE keyword='ipad'",
-                        format: "json"
-                    },
+                    //data: {
+                    //    q: "SELECT * FROM search.ec WHERE keyword='ipad'",
+                    //    format: "json"
+                    //},
 
                     // work with the response
                     success: function (response) {
-                        $("#label1").text(response.query.lang); // server response
-                    }
+                        // $("#label1").text(response.query.lang); // server response
+                        $("#label1").text(response.test.t1.t2); // server response
+                    },
+                    error: function ( jqXHR, textStatus, errorThrown ) {
+                        // $("#label1").text(response.query.lang); // server response
+                    $("#label1").text(errorThrown); // server response
+                    } 
                 });
             });
         });
     </script>
 </head>
 <body>
-        <div data-role="page" id="page1">
+    <div data-role="page" id="page1">
 
         <div data-role="header">
-            <h1>blubbiblubb</h1>
+            <h1>blubbi</h1>
         </div>
         <!-- /header -->
 
