@@ -51,11 +51,11 @@
                     // work with the response
                     success: function (response) {
                         // $("#label1").text(response.query.lang); // server response
-                        $("#label1").text(response.test.t1.t2); // server response
+                        $("#label1").text(response.aufgaben[1].antworten[1].text); // server response
                     },
                     error: function ( jqXHR, textStatus, errorThrown ) {
                         // $("#label1").text(response.query.lang); // server response
-                    $("#label1").text(errorThrown); // server response
+                    $("#label1").text(textStatus); // server response
                     } 
                 });
             });
