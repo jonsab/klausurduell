@@ -9,7 +9,36 @@
     <script>
         $(document).ready(function () {
 
-            $("button").click(function () {
+            $("#button_registrieren").click(function () {
+                $.ajax("http://buchholz.hs-bremen.de/klausurduell/registrieren.aspx", {
+                    // url: ,
+
+                    // the name of the callback parameter, as specified by the YQL service
+                    jsonp: "callback",
+
+                    // tell jQuery we're expecting JSONP
+                    dataType: "jsonp",
+
+                    // tell YQL what we want and that we want JSON
+                    data: {
+                        input_benutzername: $("#input_benutzername").val(),
+                        input_kennwort: $("#input_kennwort").val()
+                    },
+
+                    // work with the response
+                    success: function (response) {
+//                        $("#label2").text(JSON.stringify(response)); // server response 
+                        $("#label2").text(response.status); // server response 
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        $("#label2").text(textStatus); // server response
+                    }
+                });
+            });
+
+            $("#button_login").click(function () {
+               // $("#input_benutzername").val("test")
+               // $("#label2").text($("#input_benutzername").val())
                 //$("#div1").load("demo_test.txt");
                 //$.ajax("http://query.yahooapis.com/v1/public/yql", {
                 //    // url: ,
@@ -23,7 +52,7 @@
                 //    // tell YQL what we want and that we want JSON
                 //    data: {
                 //        //q: "select title,abstract,url from search.news where query=\"cat\"",
-                //        q: "SELECT * FROM search.ec WHERE keyword='ipad'",
+                //        q: "SELECT * FROM search.ec WHERE keyword='ipad'"
                 //        format: "json"
                 //    },
 
@@ -43,15 +72,16 @@
                     dataType: "jsonp",
 
                     // tell YQL what we want and that we want JSON
-                    //data: {
-                    //    q: "SELECT * FROM search.ec WHERE keyword='ipad'",
-                    //    format: "json"
-                    //},
+                    data: {
+                        input_benutzername: $("#input_benutzername").val(),
+                        format: "json"
+                    },
 
                     // work with the response
                     success: function (response) {
                         // $("#label1").text(response.query.lang); // server response
-                        $("#label1").text(response.aufgaben[1].antworten[1].text); // server response
+                        $("#label2").text(JSON.stringify(response)); // server response
+//                        $("#label2").text(response.aufgaben[1].antworten[1].text); // server response
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         // $("#label1").text(response.query.lang); // server response
@@ -90,17 +120,18 @@
                 <tr>
                     <td class="auto-style3">Benutzername: </td>
                     <td class="auto-style2">
-                        <input type="text" name="benutzername" style="width: 100%"></td>
+                        <input type="text" id="input_benutzername" style="width: 100%"></td>
                 </tr>
                 <tr>
                     <td class="auto-style4">Kennwort: </td>
                     <td>
-                        <input type="password" name="kennwort" style="width: 100%"></td>
+                        <input type="password" id="input_kennwort" style="width: 100%"></td>
                 </tr>
             </table>
-            <button data-inline="true">Login</button>
-            <button data-inline="true">Registrieren</button>
+            <button id="button_login" data-inline="true">Login</button>
+            <button id="button_registrieren" data-inline="true">Registrieren</button>
             <a href="http://buchholz.hs-bremen.de/klausurduell/default.aspx">test</a>
+            <label id="label2">label2</label>
 
         </div>
         <div data-role="footer">
