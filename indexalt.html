@@ -53,53 +53,37 @@
                         // $("#label1").text(response.query.lang); // server response
                         $("#label1").text(response.aufgaben[1].antworten[1].text); // server response
                     },
-                    error: function (jqXHR, textStatus, errorThrown) {
+                    error: function ( jqXHR, textStatus, errorThrown ) {
                         // $("#label1").text(response.query.lang); // server response
-                        $("#label1").text(textStatus); // server response
-                    }
+                    $("#label1").text(textStatus); // server response
+                    } 
                 });
             });
         });
     </script>
-    <style type="text/css">
-        .auto-style1 {
-            width: 100%;
-        }
-        .auto-style2 {
-            height: 26px;
-        }
-        .auto-style3 {
-            height: 26px;
-            width: 154px;
-        }
-        .auto-style4 {
-            width: 154px;
-        }
-    </style>
 </head>
 <body>
     <div data-role="page" id="page1">
 
         <div data-role="header">
-            <h1>Login</h1>
+            <h1>blubbi</h1>
         </div>
         <!-- /header -->
 
         <div data-role="content">
-            <table class="auto-style1">
-                <tr>
-                    <td class="auto-style3">Benutzername: </td>
-                    <td class="auto-style2">
-                        <input type="text" name="benutzername" style="width: 100%"></td>
-                </tr>
-                <tr>
-                    <td class="auto-style4">Kennwort: </td>
-                    <td>
-                        <input type="password" name="kennwort" style="width: 100%"></td>
-                </tr>
-            </table>
-            <button>Login</button>
+            <p>Hello world</p>
+
+            <label id="label1">noch nichts</label>
+            <div id="div1">
+                <h2>Let jQuery AJAX Change This Text</h2>
+            </div>
+            <button>Get External Content</button>
         </div>
+        <!-- /content -->
+
+        <a href="page2.html">seite2
+        </a>
+
         <div data-role="footer">
             <h4>My Footer</h4>
         </div>
