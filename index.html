@@ -86,8 +86,9 @@
                     success: function (response) {
                         if (response.status == "ok") {
 
-                            localStorage.lastname = "Smith"
-                            $("#label_statusmeldung").text(localStorage.lastname);
+                            localStorage.benutzername = benutzername
+                            $("#label_statusmeldung").text(localStorage.benutzername)
+                            window.location.href = "spiel.html"
 
                         } else {
 
@@ -147,7 +148,7 @@
             </table>
             <button id="button_login" data-inline="true">Login</button>
             <button id="button_registrieren" data-inline="true">Registrieren</button>
-            <a href="http://buchholz.hs-bremen.de/klausurduell/default.aspx">test</a>
+            <a href="page2.html">test</a>
             <label id="label2">label2</label>
             <br />
             <span class="auto-style5">
