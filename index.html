@@ -10,82 +10,92 @@
         $(document).ready(function () {
 
             $("#button_registrieren").click(function () {
-                $.ajax("http://buchholz.hs-bremen.de/klausurduell/registrieren.aspx", {
-                    // url: ,
 
-                    // the name of the callback parameter, as specified by the YQL service
+                benutzername = $("#input_benutzername").val()
+                kennwort = $("#input_kennwort").val()
+
+                if (benutzername == "") {
+
+                    $("#label_statusmeldung").text("Bitte wählen Sie einen Benutzernamen.");
+                    return
+                }
+
+                if (kennwort == "") {
+
+                    $("#label_statusmeldung").text("Bitte wählen Sie ein Kennwort.");
+                    return
+                }
+                
+                $.ajax("http://buchholz.hs-bremen.de/klausurduell/registrieren.aspx", {
+
                     jsonp: "callback",
 
-                    // tell jQuery we're expecting JSONP
                     dataType: "jsonp",
 
-                    // tell YQL what we want and that we want JSON
                     data: {
-                        input_benutzername: $("#input_benutzername").val(),
-                        input_kennwort: $("#input_kennwort").val()
+                        input_benutzername: benutzername,
+                        input_kennwort: kennwort
                     },
 
-                    // work with the response
                     success: function (response) {
-//                        $("#label2").text(JSON.stringify(response)); // server response 
-                        $("#label2").text(response.status); // server response 
+//                        $("#label2").text(JSON.stringify(response));  
+                        if (response.status == "ok") {
+
+                            $("#label_statusmeldung").text("Registrierung war erfolgreich.");
+
+                        } else {
+
+                            $("#label_statusmeldung").text("Bitte wählen Sie einen anderen Benutzernamen.");
+
+                        }
+
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-                        $("#label2").text(textStatus); // server response
+                        $("#label2").text(textStatus);
                     }
                 });
             });
 
             $("#button_login").click(function () {
-               // $("#input_benutzername").val("test")
-               // $("#label2").text($("#input_benutzername").val())
-                //$("#div1").load("demo_test.txt");
-                //$.ajax("http://query.yahooapis.com/v1/public/yql", {
-                //    // url: ,
 
-                //    // the name of the callback parameter, as specified by the YQL service
-                //    jsonp: "callback",
+                benutzername = $("#input_benutzername").val()
+                kennwort = $("#input_kennwort").val()
 
-                //    // tell jQuery we're expecting JSONP
-                //    dataType: "jsonp",
+                if (benutzername == "") {
 
-                //    // tell YQL what we want and that we want JSON
-                //    data: {
-                //        //q: "select title,abstract,url from search.news where query=\"cat\"",
-                //        q: "SELECT * FROM search.ec WHERE keyword='ipad'"
-                //        format: "json"
-                //    },
+                    $("#label_statusmeldung").text("Bitte geben Sie Ihren Benutzernamen ein.");
+                    return
+                }
 
-                //    // work with the response
-                //    success: function (response) {
-                //        // $("#label1").text(response.query.lang); // server response
-                //        $("#label1").text(response.query.results.result.total); // server response
-                //    }
-                //});
-                $.ajax("http://buchholz.hs-bremen.de/klausurduell/default.aspx", {
-                    // url: ,
+                if (kennwort == "") {
 
-                    // the name of the callback parameter, as specified by the YQL service
+                    $("#label_statusmeldung").text("Bitte geben Sie Ihr Kennwort ein.");
+                    return
+                }
+
+                $.ajax("http://buchholz.hs-bremen.de/klausurduell/login.aspx", {
                     jsonp: "callback",
 
-                    // tell jQuery we're expecting JSONP
                     dataType: "jsonp",
 
-                    // tell YQL what we want and that we want JSON
                     data: {
-                        input_benutzername: $("#input_benutzername").val(),
-                        format: "json"
+                        input_benutzername: benutzername,
+                        input_kennwort: kennwort
                     },
 
-                    // work with the response
                     success: function (response) {
-                        // $("#label1").text(response.query.lang); // server response
-                        $("#label2").text(JSON.stringify(response)); // server response
-//                        $("#label2").text(response.aufgaben[1].antworten[1].text); // server response
+                        if (response.status == "ok") {
+
+                            $("#label_statusmeldung").text("Login war erfolgreich.");
+
+                        } else {
+
+                            $("#label_statusmeldung").text("Login war nicht erfolgreich.");
+
+                        }
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-                        // $("#label1").text(response.query.lang); // server response
-                        $("#label1").text(textStatus); // server response
+                        $("#label2").text(textStatus);
                     }
                 });
             });
@@ -95,15 +105,21 @@
         .auto-style1 {
             width: 100%;
         }
+
         .auto-style2 {
             height: 26px;
         }
+
         .auto-style3 {
             height: 26px;
             width: 154px;
         }
+
         .auto-style4 {
             width: 154px;
+        }
+        .auto-style5 {
+            color: #FF6600;
         }
     </style>
 </head>
@@ -132,12 +148,11 @@
             <button id="button_registrieren" data-inline="true">Registrieren</button>
             <a href="http://buchholz.hs-bremen.de/klausurduell/default.aspx">test</a>
             <label id="label2">label2</label>
-
+            <br />
+            <span class="auto-style5">
+            <label id="label_statusmeldung"></label></span>
         </div>
-        <div data-role="footer">
-            <h4>My Footer</h4>
-        </div>
-        <!-- /footer -->
+        
 
     </div>
     <!-- /page -->
