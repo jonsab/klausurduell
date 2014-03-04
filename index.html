@@ -86,7 +86,8 @@
                     success: function (response) {
                         if (response.status == "ok") {
 
-                            localStorage.benutzername = benutzername
+                            localStorage.benutzer_name = benutzername
+                            localStorage.benutzer_id = response.benutzer_id
                          // $("#label_statusmeldung").text(localStorage.benutzername)
                             window.location.href = "spiel.html"
 
