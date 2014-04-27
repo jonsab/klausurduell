@@ -9,59 +9,153 @@
     <script>
         $(document).ready(function () {
 
-            $("button").click(function () {
-                //$("#div1").load("demo_test.txt");
-                $.ajax({
-                    url: "http://query.yahooapis.com/v1/public/yql",
+            $("#button_registrieren").click(function () {
 
-                    // the name of the callback parameter, as specified by the YQL service
+                benutzername = $("#input_benutzername").val()
+                kennwort = $("#input_kennwort").val()
+
+                if (benutzername == "") {
+
+                    $("#label_statusmeldung").text("Bitte wählen Sie einen Benutzernamen.");
+                    return
+                }
+
+                if (kennwort == "") {
+
+                    $("#label_statusmeldung").text("Bitte wählen Sie ein Kennwort.");
+                    return
+                }
+                
+                $.ajax("http://buchholz.hs-bremen.de/klausurduell/registrieren.aspx", {
+
                     jsonp: "callback",
 
-                    // tell jQuery we're expecting JSONP
                     dataType: "jsonp",
 
-                    // tell YQL what we want and that we want JSON
                     data: {
-                        //                        q: "select title,abstract,url from search.news where query=\"cat\"",
-                        q: "SELECT title FROM search.ec WHERE keyword='ipad'",
-                        format: "json"
+                        input_benutzername: benutzername,
+                        input_kennwort: kennwort
                     },
 
-                    // work with the response
                     success: function (response) {
-                        $("#label1").text(response.query.lang); // server response
+//                        $("#label2").text(JSON.stringify(response));  
+                        if (response.status == "ok") {
+
+                            $("#label_statusmeldung").text("Registrierung war erfolgreich.");
+
+                        } else {
+
+                            $("#label_statusmeldung").text("Bitte wählen Sie einen anderen Benutzernamen.");
+
+                        }
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        $("#label2").text(textStatus);
+                    }
+                });
+            });
+
+            $("#button_login").click(function () {
+
+                benutzername = $("#input_benutzername").val()
+                kennwort = $("#input_kennwort").val()
+
+                if (benutzername == "") {
+
+                    $("#label_statusmeldung").text("Bitte geben Sie Ihren Benutzernamen ein.");
+                    return
+                }
+
+                if (kennwort == "") {
+
+                    $("#label_statusmeldung").text("Bitte geben Sie Ihr Kennwort ein.");
+                    return
+                }
+
+                $.ajax("http://buchholz.hs-bremen.de/klausurduell/login.aspx", {
+                    jsonp: "callback",
+
+                    dataType: "jsonp",
+
+                    data: {
+                        input_benutzername: benutzername,
+                        input_kennwort: kennwort
+                    },
+
+                    success: function (response) {
+                        if (response.status == "ok") {
+
+                            localStorage.benutzer_name = benutzername
+                            localStorage.benutzer_id = response.benutzer_id
+                         // $("#label_statusmeldung").text(localStorage.benutzername)
+                            window.location.href = "spiel.html"
+
+                        } else {
+
+                            $("#label_statusmeldung").text("Login war nicht erfolgreich.");
+
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        $("#label2").text(textStatus);
                     }
                 });
             });
         });
     </script>
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+        }
+
+        .auto-style2 {
+            height: 26px;
+        }
+
+        .auto-style3 {
+            height: 26px;
+            width: 154px;
+        }
+
+        .auto-style4 {
+            width: 154px;
+        }
+        .auto-style5 {
+            color: #FF6600;
+        }
+    </style>
 </head>
 <body>
-        <div data-role="page" id="page1">
+    <div data-role="page" id="page1">
 
         <div data-role="header">
-            <h1>blubbiblubb</h1>
+            <h1>Login</h1>
         </div>
         <!-- /header -->
 
         <div data-role="content">
-            <p>Hello world</p>
-
-            <label id="label1">noch nichts</label>
-            <div id="div1">
-                <h2>Let jQuery AJAX Change This Text</h2>
-            </div>
-            <button>Get External Content</button>
+            <table class="auto-style1">
+                <tr>
+                    <td class="auto-style3">Benutzername: </td>
+                    <td class="auto-style2">
+                        <input type="text" id="input_benutzername" style="width: 100%"></td>
+                </tr>
+                <tr>
+                    <td class="auto-style4">Kennwort: </td>
+                    <td>
+                        <input type="password" id="input_kennwort" style="width: 100%"></td>
+                </tr>
+            </table>
+            <button id="button_login" data-inline="true">Login</button>
+            <button id="button_registrieren" data-inline="true">Registrieren</button>
+            <a href="page2.html">test</a>
+            <label id="label2">label2</label>
+            <br />
+            <span class="auto-style5">
+            <label id="label_statusmeldung"></label></span>
         </div>
-        <!-- /content -->
-
-        <a href="page2.html">seite2
-        </a>
-
-        <div data-role="footer">
-            <h4>My Footer</h4>
-        </div>
-        <!-- /footer -->
+        
 
     </div>
     <!-- /page -->

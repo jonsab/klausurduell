@@ -6,7 +6,7 @@
         id        = "de.hs-bremen.f4.test-app"
         version   = "1.0.0">
 
-  <name>Hello World</name>
+  <name>Klausurduell</name>
 
   <description>
     description
@@ -40,7 +40,7 @@
   <!-- ios: controls whether data types (such as phone no. and dates) are automatically turned into links by the system -->
   <preference name="exit-on-suspend"            value="false" />
   <!-- ios: if set to true, app will terminate when home button is pressed -->
-  <preference name="auto-hide-splash-screen"    value="false" />
+  <preference name="auto-hide-splash-screen"    value="true" />
   <!-- ios: if set to false, the splash screen must be hidden using a JavaScript API -->
   <preference name="disable-cursor"             value="false" />
   <!-- blackberry: prevents a mouse-icon/cursor from being displayed on the app -->
@@ -52,6 +52,7 @@
   <!-- Plugins -->
 
   <!-- Core plugins -->
+  <!--
   <gap:plugin name="org.apache.cordova.battery-status" />
   <gap:plugin name="org.apache.cordova.camera" />
   <gap:plugin name="org.apache.cordova.media-capture" />
@@ -70,6 +71,7 @@
   <gap:plugin name="org.apache.cordova.network-information" />
   <gap:plugin name="org.apache.cordova.splashscreen" />
   <gap:plugin name="org.apache.cordova.vibration" />
+  -->
 
   <!-- Third party plugins -->
   <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
