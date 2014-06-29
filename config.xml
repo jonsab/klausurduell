@@ -6,14 +6,14 @@
         id        = "de.hs-bremen.f4.test-app"
         version   = "1.0.0">
 
-  <name>Klausurduell</name>
+  <name>Zahnduell</name>
 
   <description>
     description
   </description>
 
-  <author href="http://buchholz.tk" email="jonas.buchholz@gmail.com">
-    Klausurduell Team
+  <author href="http://buchholz.hs-bremen.de" email="jonas.buchholz@gmail.com">
+    Zahnduell Team
   </author>
 
   <!--
